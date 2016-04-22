@@ -1,7 +1,8 @@
 SRCMF-webapp
 ===============
 
-This webapp is a graphical interface to use the SRCMF-api grpahically. It allows the user to predicted lemma, part of speech tags, and syntax of Old french texts. 
+This webapp is a graphical interface to use the SRCMF-api graphically. It allows the user to predicted lemma, part of speech tags, and syntax of Old french texts. 
+It was done for the Syntactic Reference Corpus of Medieval French (SRCMF) project. [Here the website](http://srcmf.org/ "SRCMF's Homepage")
 
 # Build
 
