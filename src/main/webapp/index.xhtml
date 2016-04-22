@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Syntactic Reference Corpus Of Medieval French</title>
+	<style type="text/css">
+#growl {
+	padding-left: 20px;
+	padding-top: 400px;
+}
+</style>
+</h:head>
+<h:body>
+<!-- xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" -->
+	<div class="ui-grid ui-grid-responsive">
+		<div class="ui-grid-row">
+			<div class="ui-grid-col-12">
+				<h:form id="tb">
+					<p:growl id="messagemenu" />
+					<p:menubar autoDisplay="true" id="menubar">
+						<p:submenu icon="fa fa-users">
+							<p:menuitem value="Isabelle Tellier" icon="fa fa-user"
+								update="messagemenu" ajax="true"
+								url="http://www.lattice.cnrs.fr/sites/itellier/">
+							</p:menuitem>
+							<p:menuitem value="Sophie Prévost" icon="fa fa-user"
+								update="messagemenu" ajax="true" url="http://www.lattice.cnrs.fr/Sophie-Prevost,229">
+							</p:menuitem>
+							<p:menuitem value="Kim Gerdes" icon="fa fa-user"
+								update="messagemenu" ajax="true" url="http://gerdes.fr/">
+							</p:menuitem>
+							<p:menuitem value="Mathieu Constant" icon="fa fa-user"
+								update="messagemenu" ajax="true" url="http://igm.univ-mlv.fr/~mconstan/">
+							</p:menuitem>
+						</p:submenu>
+						<p:submenu icon="fa fa-question">
+							<p:menuitem value="Contents" url="#" />
+							<p:submenu label="Search" icon="ui-icon-search">
+								<p:submenu label="Text">
+									<p:menuitem value="Workspace" url="#" />
+								</p:submenu>
+								<p:menuitem value="File" url="#" />
+							</p:submenu>
+						</p:submenu>
+
+						<p:menuitem icon="fa fa-th-list" ajax="true"
+							actionListener="#{launch1on1.toSelect}" />
+
+						<p:menuitem icon="fa fa-bar-chart" ajax="true"
+							actionListener="#{launch1on1.toCharts}" />
+
+						<p:menuitem icon="fa fa-table" ajax="true"
+							actionListener="#{launch1on1.toTable}" />
+
+						<p:menuitem icon="fa fa-power-off" update="messagemenu"
+							ajax="true" actionListener="#{launch1on1.exit}" />
+
+						<f:facet name="options">
+							<p:commandButton type="button"
+								actionListener="#{launch1on1.exit}" icon="fa fa-power-off"
+								update="messagemenu" />
+						</f:facet>
+					</p:menubar>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+
+
+	<p:sticky target="tb" />
+	
+	<!-- <p:tabView dynamic="true" cache="true">
+	 <p:ajax event="tabChange" update="tab charts"/>
+        <p:ajax event="tabClose" update="tab charts" />
+	
+		<p:tab title="Selection" id="tabselect"> -->
+		
+			
+			<p:panel id="select" collapsed="false" toggleable="true"
+				toggleOrientation="vertical" visible="true">
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-2">
+							<h:form enctype="multipart/form-data">
+								<p:growl id="messages" showDetail="true" />
+
+								<p:fileUpload value="#{fileUploadView.file}" mode="simple"
+									skinSimple="true" />
+
+								<p:commandButton value="Submit" ajax="false"
+									actionListener="#{fileUploadView.storeUpload}" disabled="false" />
+							</h:form>
+						</div>
+						<div class="ui-grid-col-7">
+
+							<h:form
+								styleClass="ui-panel-titlebar ui-helper-clearfix ui-corner-all">
+								<div class="ui-grid ui-grid-responsive">
+									<div class="ui-grid-row">
+										<div class="ui-grid-col-5">
+											<p:growl id="message" showDetail="true" />
+											<h:panelGrid columns="2" style="margin-bottom:10px"
+												cellpadding="5" columnClasses="label, value" header="Model:">
+												<p:outputLabel for="model" value="Model:" />
+												<p:selectOneMenu id="model" value="#{launch1on1.model}"
+													filter="true" filterMatchMode="contains">
+													<f:selectItems value="#{dataExporterView.models}"
+														var="model" itemLabel="#{model.name}"
+														itemValue="#{model.name}" />
+													<p:ajax event="change" />
+												</p:selectOneMenu>
+											</h:panelGrid>
+										</div>
+										<div class="ui-grid-col-5">
+											<h:panelGrid columns="2" style="margin-bottom:10px"
+												cellpadding="5" columnClasses="label, value">
+												<p:outputLabel for="test" value="Test:" />
+												<p:selectOneMenu id="test" value="#{launch1on1.test}"
+													filter="true" filterMatchMode="contains">
+													<f:selectItems value="#{dataExporterView.testFiles}"
+														var="testFile" itemLabel="#{testFile.name}"
+														itemValue="#{testFile.name}" />
+													<p:ajax event="change" />
+												</p:selectOneMenu>
+												<!-- <p:selectOneListbox id="test" value="#{launch1on1.test}">
+											<f:selectItem itemLabel="Beroul" itemValue="beroul" />
+											<f:selectItem itemLabel="Aucassin" itemValue="aucassin" />
+											<f:selectItem itemLabel="Alexis" itemValue="alexis" />
+											<p:ajax event="change" />
+										</p:selectOneListbox> -->
+											</h:panelGrid>
+										</div>
+										<div class="ui-grid-col-2">
+											<p:commandButton value="Submit"
+												actionListener="#{launch1on1.apiLaunch}" update="message charts tab"
+												icon="ui-icon-check">
+												<!-- tab charts -->
+												<p:confirm header="Confirmation" message="Are you sure?"
+													icon="ui-icon-alert" />
+											</p:commandButton>
+
+											<p:confirmDialog global="true" showEffect="fade"
+												hideEffect="fade">
+												<p:commandButton value="Yes" type="button"
+													styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+												<p:commandButton value="No" type="button"
+													styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+											</p:confirmDialog>
+										</div>
+									</div>
+								</div>
+
+							</h:form>
+
+
+						</div>
+
+						<div class="ui-grid-col-3">
+							<!-- <h3>IFrame</h3>
+					<p:lightBox iframe="true" id="lighbox3" appendTo="@(body)"
+						style="width:100%">
+						<h:outputLink value="http://arborator.ilpga.fr/q.cgi"
+							title="Arborator quick access">
+							<h:outputText value="Arborator quick access" />
+						</h:outputLink>
+					</p:lightBox>
+					<p:lightBox iframe="true" id="lighboxArborator">
+						<h:outputLink value="/arborator.html"
+							title="Arborator quick access">
+							<h:outputText value="Arborator quick access" />
+						</h:outputLink>
+					</p:lightBox>
+					<h:form>
+						<p:commandButton value="Select Car" icon="ui-icon-extlink"
+							onclick="PF('exampleDlg').show();">
+						</p:commandButton>
+					</h:form> -->
+						</div>
+					</div>
+				</div>
+			</p:panel>
+			<p:ajaxStatus onstart="PF('statusDialog1').show()"
+				onsuccess="PF('statusDialog1').hide()" />
+
+			<p:dialog widgetVar="statusDialog1" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage name="img/loading.gif" />
+			</p:dialog>
+		<!-- </p:tab>
+			
+		<p:tab title="Charts"> -->
+
+			<p:panel id="charts" collapsed="false" toggleable="true"
+				toggleOrientation="vertical" visible="true">
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-12">
+							<h:panelGrid columns="3" columnClasses="left,center, right"
+								style="width:100%">
+								<p:chart id="scores" type="bar"
+									model="#{chartView.animatedModel}" style="width:400px;" />
+							</h:panelGrid>
+						</div>
+					</div>
+				</div>
+			</p:panel>
+			<p:ajaxStatus onstart="PF('statusDialog2').show()"
+				onsuccess="PF('statusDialog2').hide()" />
+
+			<p:dialog widgetVar="statusDialog2" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage name="img/loading.gif" />
+			</p:dialog>
+		<!-- </p:tab>
+
+		<p:tab title="Table"> -->
+		
+			<!-- <p:dialog header="Example" widgetVar="exampleDlg" closable="true"
+		resizable="true" appendTo="@(body)" modal="true" dynamic=""> -->
+			<p:panel id="tab" collapsed="false" toggleable="true"
+				toggleOrientation="vertical" visible="true">
+
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-12">
+							<!-- <h:form rendered="#{Person.name != 'null'}"> -->
+
+							<h:form>
+								<p:dataTable id="tbl" var="word"
+									value="#{dataExporterView.words}" scrollRows="20"
+									scrollable="true" liveScroll="true" scrollHeight="300"
+									editable="true" editMode="cell">
+
+									<p:ajax event="cellEdit"
+										listener="#{dataExporterView.onCellEdit}" />
+
+									<p:column headerText="Id">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.idSent}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="modelInput" value="#{word.idSent}"
+													style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Form">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.form}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{word.form}" style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Lemma">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.lemmaGold}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{word.lemmaGold}" style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="LemmaP">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.lemmaPredicted}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{word.lemmaPredicted}"
+													style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="POS">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.posGold}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{word.posGold}" style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="PPOS">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.posPredictedWapiti}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{word.posPredictedWapiti}"
+													style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+
+									<p:column headerText="Head">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.governor}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{word.governor}" style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="PHead">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.governorP}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{word.governorP}" style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="Syn">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.synFunction}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{word.synFunction}" style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column headerText="PSyn">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{word.synFunctionP}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText value="#{word.synFunctionP}" style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+								</p:dataTable>
+							</h:form>
+
+						</div>
+
+					</div>
+				</div>
+			</p:panel>
+		<!-- </p:tab> -->
+		<p:ajaxStatus onstart="PF('statusDialog3').show()"
+				onsuccess="PF('statusDialog3').hide()" />
+
+			<p:dialog widgetVar="statusDialog3" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage name="img/loading.gif" />
+			</p:dialog>
+	<!-- </p:tabView> -->
+	<!-- </p:dialog> -->
+</h:body>
+</html>
