@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+	<link rel="shortcut icon" type="image/x-icon"
+		href="/srcmf-webapp/img/smurf2.ico" />
+	<title>Syntactic Reference Corpus Of Medieval French</title>
+	<style type="text/css">
+#growl {
+	padding-left: 50px;
+	padding-top: 400px;
+}
+</style>
+</h:head>
+
+<!-- events before page load -->
+<f:event listener="#{onload.onLoad}" type="preRenderView" />
+
+<h:body>
+
+	<div class="ui-grid ui-grid-responsive">
+		<div class="ui-grid-row">
+			<div class="ui-grid-col-12">
+				<h:form id="tb">
+					<p:growl id="messagemenu" />
+					<p:menubar autoDisplay="true" id="menubar">
+						<p:menuitem style="font-weight:bold; font-size:130%" value="SRCMF Home Page" icon="fa fa-home"
+							update="messagemenu" ajax="true" url="http://www.srcmf.org/" />
+						<p:submenu style="font-weight:bold; font-size:120%" label="Affiliations" icon="fa fa-university">
+							<p:menuitem value="LaTTiCe-CNRS" icon="fa fa-institution"
+								update="messagemenu" ajax="true"
+								url="http://www.lattice.cnrs.fr/">
+							</p:menuitem>
+							<p:menuitem value="LIGM-CNRS" icon="fa fa-institution"
+								update="messagemenu" ajax="true" url="http://ligm.u-pem.fr/">
+							</p:menuitem>
+							<p:menuitem value="LPP-CNRS" icon="fa fa-institution"
+								update="messagemenu" ajax="true" url="http://lpp.in2p3.fr/">
+							</p:menuitem>
+							<p:menuitem value="Sorbonne-Nouvelle" icon="fa fa-university"
+								update="messagemenu" ajax="true"
+								url="http://www.univ-paris3.fr/">
+							</p:menuitem>
+							<p:menuitem value="UPEM" icon="fa fa-institution"
+								update="messagemenu" ajax="true" url="http://www.u-pem.fr/">
+							</p:menuitem>
+						</p:submenu>
+						<p:submenu style="font-weight:bold; font-size:120%" label="Team" icon="fa fa-users">
+							<p:menuitem value="Gaël Guibon" icon="fa fa-user"
+								update="messagemenu" ajax="true">
+							</p:menuitem>
+							<p:menuitem value="Isabelle Tellier" icon="fa fa-user"
+								update="messagemenu" ajax="true"
+								url="http://www.lattice.cnrs.fr/sites/itellier/">
+							</p:menuitem>
+							<p:menuitem value="Sophie Prévost" icon="fa fa-user"
+								update="messagemenu" ajax="true"
+								url="http://www.lattice.cnrs.fr/Sophie-Prevost,229">
+							</p:menuitem>
+							<p:menuitem value="Mathieu Constant" icon="fa fa-user"
+								update="messagemenu" ajax="true"
+								url="http://igm.univ-mlv.fr/~mconstan/">
+							</p:menuitem>
+							<p:menuitem value="Kim Gerdes" icon="fa fa-user"
+								update="messagemenu" ajax="true" url="http://gerdes.fr/">
+							</p:menuitem>
+						</p:submenu>
+						<p:menuitem style="font-weight:bold; font-size:130%" value="GitHub" icon="fa fa-github"
+							update="messagemenu" ajax="true" url="https://github.com/gguibon/SRCMF-webapp" />
+
+						<f:facet name="options" action="#{launch1on1.exit}">
+							<p:menuitem icon="fa fa-power-off" update="messagemenu"
+								ajax="true" >
+							</p:menuitem>
+							<p:outputLabel>Version 0.9.1 Beta</p:outputLabel>
+						</f:facet>
+					</p:menubar>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+
+
+	<p:sticky target="tb" />
+
+	<p:separator />
+
+	<ui:include src="/WEB-INF/select.xhtml" />
+
+	<p:separator />
+
+	<ui:include src="/WEB-INF/charts.xhtml" />
+
+	<p:separator />
+
+	<ui:include src="/WEB-INF/tab.xhtml" />
+
+
+<h:outputScript library="js" name="/js/srcmf-demo.js" />
+</h:body>
+</html>

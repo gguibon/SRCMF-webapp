@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:panel id="tab" widgetVar="tabwv" header="Source"  collapsed="false" toggleable="true"
+		toggleOrientation="vertical" visible="true" >
+
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-12">
+					<!-- <h:form rendered="#{Person.name != 'null'}"> -->
+
+					<h:form>
+						<p:dataTable id="tbl" var="word" value="#{dataExporterView.words}"
+							scrollRows="50" scrollable="true" liveScroll="true"
+							scrollHeight="400" editable="true" editMode="cell">
+
+							<p:ajax event="cellEdit"
+								listener="#{dataExporterView.onCellEdit}"
+								 />
+
+
+							<p:column headerText="Id">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.idSent}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="modelInput" value="#{word.idSent}"
+											style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Form">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.form}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{word.form}" style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Lemma">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.lemmaGold}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{word.lemmaGold}" style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="LemmaP">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.lemmaPredicted}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{word.lemmaPredicted}" style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="POS">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.posGold}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{word.posGold}" style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="PPOS">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.posPredictedWapiti}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{word.posPredictedWapiti}"
+											style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+
+							<p:column headerText="Head">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.governor}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{word.governor}" style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="PHead">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.governorP}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{word.governorP}" style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Syn">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.synFunction}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{word.synFunction}" style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="PSyn">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{word.synFunctionP}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{word.synFunctionP}" style="width:96%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+						</p:dataTable>
+						<pe:blockUI target="tbl" widgetVar="blockUIWidget5">
+						<h:panelGrid columns="2">
+							<h:graphicImage name="img/ajax-loader1.gif"
+								style="margin-right: 12px; vertical-align: middle;" />
+							<h:outputText value="Processing changes..."
+								style="white-space: nowrap;" />
+						</h:panelGrid>
+					</pe:blockUI>
+					</h:form>
+					
+				</div>
+
+			</div>
+		</div>
+	</p:panel>
+	<!-- <p:ajaxStatus onstart="PF('statusDialog1').show()"
+				onsuccess="PF('statusDialog1').hide()" />
+
+			<p:dialog widgetVar="statusDialog1" modal="true" draggable="false"
+				closable="false" resizable="false" showHeader="false">
+				<p:graphicImage name="img/ajax-loader1.gif" />
+			</p:dialog> -->
+</ui:composition>

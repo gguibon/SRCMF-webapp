@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+	<p:panel id="select" collapsed="false" toggleable="true"
+		toggleOrientation="vertical" visible="true">
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row">
+				<!-- <div class="ui-grid-col-2">
+					
+				</div> -->
+				<div class="ui-grid-col-12">
+
+					<h:form
+						styleClass="ui-panel-titlebar ui-helper-clearfix ui-corner-all">
+						<div class="ui-grid ui-grid-responsive">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-4">
+									<div class="ui-grid-row">
+										<div class="ui-grid-col-12">
+											<h1>1. Select a model</h1>
+											<p:growl id="message" showDetail="true" />
+											<h:panelGrid id="selectModel" columns="2"
+												style="margin-bottom:10px" cellpadding="5"
+												columnClasses="label, value" header="Model:">
+												<p:outputLabel style="font-weight:bold" for="model"
+													value="Trained on:" />
+												<p:selectOneMenu id="model" value="#{selectView.model}"
+													filter="true" filterMatchMode="contains" transient="true">
+													<f:selectItem itemValue="#{null}" itemLabel="--select--"
+														noSelectionOption="false" transient="true" />
+													<f:selectItem itemLabel="Aucassin" itemValue="aucassin" />
+													<f:selectItem itemLabel="Lapidaire" itemValue="lapidaire" />
+													<f:selectItem itemLabel="Legier" itemValue="legier" />
+												</p:selectOneMenu>
+											</h:panelGrid>
+										</div>
+									</div>
+									<div class="ui-grid-row">
+										<div class="ui-grid-col-12"></div>
+									</div>
+
+
+								</div>
+								<div class="ui-grid-col-5">
+									<div class="ui-grid-row">
+										<div class="ui-grid-col-12">
+											<h1>2. Select a test file</h1>
+											<h:panelGrid id="selectTest" columns="2"
+												style="margin-bottom:10px" cellpadding="5"
+												columnClasses="label, value">
+												<p:outputLabel style="font-weight:bold" for="test"
+													value="From the SRCMF..." />
+												<p:selectOneMenu id="test" value="#{selectView.test}"
+													filter="true" filterMatchMode="contains" transient="true">
+													<f:selectItem itemValue="#{null}" itemLabel="--select--"
+														noSelectionOption="true" />
+													<f:selectItem itemLabel="Aucassin" itemValue="aucassin" />
+													<f:selectItem itemLabel="Lapidaire" itemValue="lapidaire" />
+													<f:selectItem itemLabel="Legier" itemValue="legier" />
+												</p:selectOneMenu>
+											</h:panelGrid>
+											<pe:blockUI target="selectTest" widgetVar="blockUIWidget2">
+												<h:panelGrid columns="2">
+													<h:graphicImage name="img/ajax-loader1.gif"
+														style="margin-right: 12px; vertical-align: middle;" />
+													<h:outputText value="Charging test file..."
+														style="white-space: nowrap;" />
+												</h:panelGrid>
+											</pe:blockUI>
+										</div>
+									</div>
+									<div class="ui-grid-row">
+										<div class="ui-grid-col-12">
+											<div class="ui-grid-col-12">
+												<p:outputLabel style="font-weight:bold" for="test"
+													value="...Or drag and drop your own file" />
+												<p:fileUpload id="uploadTest" style="width:250px"
+													fileUploadListener="#{selectView.upload}" mode="advanced"
+													dragDropSupport="true" update="messages nameUTF"
+													sizeLimit="10000000" allowTypes="/(\.|\/)(conll|tsv)$/"
+													auto="true">
+													<h:outputText
+														style="font-weight:bold; color:green; font-size:100%"
+														id="nameUTF" value="#{selectView.uploadedFileName}" />
+												</p:fileUpload>
+
+												<p:growl id="messages" showDetail="true" />
+												<pe:blockUI target="uploadTest" widgetVar="blockUIWidget4">
+													<h:panelGrid columns="2">
+														<h:graphicImage name="img/ajax-loader1.gif"
+															style="margin-right: 12px; vertical-align: middle;" />
+														<h:outputText value="Uploading..."
+															style="white-space: nowrap;" />
+													</h:panelGrid>
+												</pe:blockUI>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="ui-grid-col-3">
+									<p:panel id="processes">
+										<div class="ui-grid-row">
+											<div class="ui-grid-col-12">
+												<h1>3. Start the process</h1>
+												<p:commandButton ajax="true" id="startApi"
+													value="Process API"
+													actionListener="#{selectView.apiLaunch}"
+													update="message charts tab" icon="ui-icon-check"
+													onstart="PF('processeswv').block()"
+													oncomplete="PF('processeswv').unblock()">
+
+													<p:confirm header="Confirmation"
+														message="It will take about 25 seconds. Continue?"
+														icon="ui-icon-alert" />
+												</p:commandButton>
+
+												<p:confirmDialog global="true" showEffect="fade"
+													hideEffect="fade">
+													<p:commandButton value="Yes" type="button"
+														styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+													<p:commandButton value="No" type="button"
+														styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+												</p:confirmDialog>
+											</div>
+										</div>
+										<div class="ui-grid-row">
+											<div class="ui-grid-col-12">
+												<p:commandButton id="startApiCustom"
+													value="Process Uploaded File"
+													actionListener="#{selectView.apiLaunchCustom}"
+													update="message charts tab" icon="ui-icon-check"
+													onstart="PF('processeswv').block()"
+													oncomplete="PF('processeswv').unblock()">
+
+													<p:confirm header="Confirmation"
+														message="It will take about 25 seconds. Continue?"
+														icon="ui-icon-alert" />
+												</p:commandButton>
+
+												<p:confirmDialog global="true" showEffect="fade"
+													hideEffect="fade">
+													<p:commandButton value="Yes" type="button"
+														styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+													<p:commandButton value="No" type="button"
+														styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+												</p:confirmDialog>
+											</div>
+										</div>
+
+
+									</p:panel>
+									<pe:blockUI target="processes" widgetVar="processeswv">
+										<h:panelGrid columns="2">
+											<h:graphicImage name="img/ajax-loader1.gif"
+												style="margin-right: 12px; vertical-align: middle;" />
+											<h:outputText value="Processing..."
+												style="white-space: nowrap;" />
+										</h:panelGrid>
+									</pe:blockUI>
+								</div>
+							</div>
+
+						</div>
+
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</p:panel>
+
+</ui:composition>

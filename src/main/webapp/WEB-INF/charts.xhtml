@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:panel id="charts" widgetVar="chartswv"  header="Charts" collapsed="false" toggleable="true"
+		toggleOrientation="vertical" visible="true">
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-12">
+					<h:panelGrid columns="3" columnClasses="left,center, right"
+						style="width:100%">
+						<p:chart id="scores" widgetVar="scoreswv" type="bar" model="#{chartView.animatedModel}"
+							style="width:50%"  responsive="true"/>
+						
+					</h:panelGrid>
+				</div>
+			</div>
+		</div>
+		<pe:blockUI target="charts" widgetVar="blockUIWidget4">
+			<h:panelGrid columns="2">
+				<h:graphicImage name="img/ajax-loader1.gif"
+					style="margin-right: 12px; vertical-align: middle;" />
+				<h:outputText value="Updating..." style="white-space: nowrap;" />
+			</h:panelGrid>
+		</pe:blockUI>
+	</p:panel>
+</ui:composition>
