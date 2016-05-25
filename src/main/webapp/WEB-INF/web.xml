@@ -1,8 +1,91 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+<!-- 	<display-name>Test</display-name> -->
+	<display-name>Servlet 3.0 Web Application</display-name>
+
+	<!-- Changer cette valeur à "Production" "Development" lors du déploiement final de l'application -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bootstrap</param-value>
+	</context-param>
+
+	<!-- <context-param> <param-name>primefaces.THEME</param-name> <param-value>bootstrap</param-value> 
+		</context-param> -->
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+	
+	<!-- <welcome-file-list> <welcome-file>index.xhtml</welcome-file> </welcome-file-list> -->
+
+	<listener>
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
+	
+	<mime-mapping>
+    <extension>eot</extension>
+    <mime-type>application/vnd.ms-fontobject</mime-type>
+</mime-mapping>
+<mime-mapping>  
+    <extension>otf</extension>  
+    <mime-type>fonts/fontawesome-webfont</mime-type>  
+</mime-mapping>      
+<mime-mapping>  
+    <extension>ttf</extension>  
+    <mime-type>fonts/fontawesome-webfont</mime-type>  
+</mime-mapping>      
+<mime-mapping>  
+    <extension>woff</extension>  
+    <mime-type>fonts/fontawesome-webfont</mime-type>  
+</mime-mapping>
+<mime-mapping>  
+    <extension>woff2</extension>  
+    <mime-type>fonts/fontawesome-webfont</mime-type>  
+</mime-mapping>
+<mime-mapping>  
+    <extension>svg</extension>  
+    <mime-type>fonts/fontawesome-webfont</mime-type>  
+</mime-mapping>
+
 </web-app>
 
+
+
+
+<!-- <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 
+	2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd" > -->
+
+
+<!-- <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"> 
+	Changer cette valeur à "Production" lors du déploiement final de l'application 
+	<context-param> <param-name>javax.faces.PROJECT_STAGE</param-name> <param-value>Development</param-value> 
+	</context-param> Déclaration du contrôleur central de JSF : la FacesServlet 
+	<servlet> <servlet-name>Faces Servlet</servlet-name> <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> 
+	<load-on-startup>1</load-on-startup> </servlet> Mapping : association des 
+	requêtes dont le fichier porte l'extension .xhtml à la FacesServlet <servlet-mapping> 
+	<servlet-name>Faces Servlet</servlet-name> <url-pattern>*.xhtml</url-pattern> 
+	</servlet-mapping> <welcome-file-list> <welcome-file>index.xhtml</welcome-file> 
+	</welcome-file-list> <listener> <listener-class>com.sun.faces.config.ConfigureListener</listener-class> 
+	</listener> </web-app> -->
