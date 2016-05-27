@@ -1,15 +1,18 @@
 package cnrs.lattice.srcmf;
 
 import java.awt.Desktop;
+import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Optional;
 
-//import org.apache.catalina.Context;
-//import org.apache.catalina.core.AprLifecycleListener;
-//import org.apache.catalina.core.StandardServer;
-//import org.apache.catalina.startup.Tomcat;
+
+
+// import org.apache.catalina.Context;
+// import org.apache.catalina.core.AprLifecycleListener;
+// import org.apache.catalina.core.StandardServer;
+// import org.apache.catalina.startup.Tomcat;
 
 public class Main {
     
@@ -29,29 +32,29 @@ public class Main {
 //        tomcat.getServer().await();
 //    }
 
-//    public static void main(String[] args) throws Exception {
-//
-//        String webappDirLocation = "src/main/webapp/";
-//        Tomcat tomcat = new Tomcat();
-//        tomcat.setPort(8080);
-//
-//        tomcat.setBaseDir(".");
-//        tomcat.getHost().setAppBase(".");
-//        tomcat.setSilent(false);
-//
-//        // Add AprLifecycleListener
-//        StandardServer server = (StandardServer) tomcat.getServer();
-//        AprLifecycleListener listener = new AprLifecycleListener();
-//        server.addLifecycleListener(listener);
-//
-//        Context ctx = tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
-//        Tomcat.addServlet(ctx, "jsf_servlet", "javax.faces.webapp.FacesServlet");
-//        ctx.addServletMapping("*.xhtml", "jsf_servlet");
-//        tomcat.start();
-////        openWebpage(new URL("http://localhost:8080"));
-//        tomcat.getServer().await();
-//        
-//      }
+    // public static void main(String[] args) throws Exception {
+
+    //     String webappDirLocation = "srcmf-webapp/";//"src/main/webapp/";
+    //     Tomcat tomcat = new Tomcat();
+    //     tomcat.setPort(8080);
+
+    //     tomcat.setBaseDir(".");
+    //     tomcat.getHost().setAppBase("srcmf-webapp/");
+    //     tomcat.setSilent(false);
+
+    //     // Add AprLifecycleListener
+    //     StandardServer server = (StandardServer) tomcat.getServer();
+    //     AprLifecycleListener listener = new AprLifecycleListener();
+    //     server.addLifecycleListener(listener);
+
+    //     Context ctx = tomcat.addWebapp("/srcmf-webapp", new File(webappDirLocation).getAbsolutePath());
+    //     Tomcat.addServlet(ctx, "jsf_servlet", "javax.faces.webapp.FacesServlet");
+    //     ctx.addServletMapping("*.xhtml", "jsf_servlet");
+    //     tomcat.start();
+    //     openWebpage(new URL("http://localhost:8080/srcmf-webapp"));
+    //     tomcat.getServer().await();
+        
+    //   }
     
     public static void openWebpage(URI uri) {
     Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;

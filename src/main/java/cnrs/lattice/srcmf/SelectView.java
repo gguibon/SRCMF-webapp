@@ -102,7 +102,7 @@ public class SelectView implements Serializable {
     public void apiLaunch() throws Exception {
     	tmpResPath = Tools.tempFile("tmp", ".res", "");
 		String[] arguments = { "1on1", "-test", chemin +"tests/"+ TEST + ".conll", 
-				"-matemodel", chemin+"models/"+model+".mategoldmodel",
+				"-matemodel", chemin+"models/"+model+".matemodel",
 				"-wapitimodel", chemin+"models/"+model+".wapitimodel",
 				"-out",	tmpResPath };
 		cnrs.lattice.engines.main.Main.main(arguments);
@@ -153,11 +153,12 @@ public class SelectView implements Serializable {
     
     public void apiLaunchCustom() throws Exception {    	
     	String path = Tools.tempFile("tmp", ".conll", this.uploadedFileContent);
-//    	Tools.ecrire("/home/gael/Programmes/apache-tomcat-8.0.30/test.conll", this.uploadedFileContent);
+    	tmpResPath = Tools.tempFile("tmp", ".res", "");
+    	System.out.println(path);
 		String[] arguments = { "1on1", "-test", path, 
-				"-matemodel", chemin+"models/"+model+".mategoldmodel",
+				"-matemodel", chemin+"models/"+model+".matemodel",
 				"-wapitimodel", chemin+"models/"+model+".wapitimodel",
-				"-out",	chemin + tmpResPath };
+				"-out",	tmpResPath };//chemin + tmpResPath
 		cnrs.lattice.engines.main.Main.main(arguments);
 		Tools.ecrire(chemin+logName, MODEL_USED+"\n"+path);
 		

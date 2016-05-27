@@ -31,12 +31,14 @@
 												<p:outputLabel style="font-weight:bold" for="model"
 													value="Trained on:" />
 												<p:selectOneMenu id="model" value="#{selectView.model}"
-													filter="true" filterMatchMode="contains" transient="true">
+													filter="true" filterMatchMode="contains" transient="true" 
+													>
 													<f:selectItem itemValue="#{null}" itemLabel="--select--"
 														noSelectionOption="false" transient="true" />
-													<f:selectItem itemLabel="Aucassin" itemValue="aucassin" />
-													<f:selectItem itemLabel="Lapidaire" itemValue="lapidaire" />
-													<f:selectItem itemLabel="Legier" itemValue="legier" />
+													<f:selectItem itemLabel="Vie de Saint Alexis" itemValue="alexis" />
+													<f:selectItem itemLabel="Aucassin et Nicolete" itemValue="aucassin" />
+													<f:selectItem itemLabel="Lapidaire en prose" itemValue="lapidaire" />
+													<f:selectItem itemLabel="Vie Saint Légier" itemValue="legier" />
 												</p:selectOneMenu>
 											</h:panelGrid>
 										</div>
