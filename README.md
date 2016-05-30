@@ -1,16 +1,16 @@
 SOFA - Syntactic Old French Annotator
 ===============
 
-![Logo by Kim Gerdes](http://sofa.ilpga.fr:8888/sofa/img/logo-KimGerdes/sofa200.png "Logo by Kim Gerdes")
+![Logo by Kim Gerdes](http://sofa.ilpga.fr:8888/sofa/img/logo-KimGerdes/sofa100.png "Logo by Kim Gerdes")
 
 
 SOFA is a web interface exploiting the [SRCMF-nlp API](https://github.com/gguibon/SRCMF-nlp-api "SRCMF nlp"). It allows the user to predicted lemma, part of speech tags, and syntax of Old french texts. 
 It was done for the Syntactic Reference Corpus of Medieval French (SRCMF) project. [Here the website](http://srcmf.org/ "SRCMF's Homepage")
 
 It follow the work made by [Mathieu Constant](http://igm.univ-mlv.fr/~mconstan/ "Mathieu Constant Website"), [Kim Gerdes](http://gerdes.fr/ "Kim Gerdes website"), Gaël Guibon, [Isabelle Tellier](http://www.lattice.cnrs.fr/sites/itellier/ "Isabelle Tellier website") and [Sophie Prévost](http://www.lattice.cnrs.fr/Sophie-Prevost,229 "Sophie Prévost website"). There is three related papers. They can can be found here:
-- [TLT 13 - Treebank and Linguistic Theories - 2014](http://srcmf.org/ "TLT13 paper")
-- [Traitement Automatiue du Langage Naturel - TALN - 2015](http://srcmf.org/ "TALN 2015 french paper")
-- [TLT 14 - Treebank and Linguistic Theories - 2015](http://srcmf.org/ "TLT14 paper")
+- [TLT 13 - Treebank and Linguistic Theories - 2014](https://hal.archives-ouvertes.fr/hal-01250959/ "TLT13 paper")
+- [Traitement Automatiue du Langage Naturel - TALN - 2015](https://hal.archives-ouvertes.fr/hal-01251006/ "TALN 2015 french paper")
+- [TLT 14 - Treebank and Linguistic Theories - 2015](https://hal.archives-ouvertes.fr/hal-01250981/ "TLT14 paper")
 
 # The web application
 
