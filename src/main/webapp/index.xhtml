@@ -6,13 +6,19 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 <h:head>
-	<link rel="shortcut icon" type="image/x-icon"
-		href="/srcmf-webapp/img/smurf2.ico" />
-	<title>Syntactic Reference Corpus Of Medieval French</title>
+	<link rel="shortcut icon" type="image/png"
+		href="img/logo-KimGerdes/sofaonly200.png" />
+	<title>SOFA - Syntactic Old French Annotator</title>
 	<style type="text/css">
 #growl {
 	padding-left: 50px;
 	padding-top: 400px;
+}
+.responsivecenter {
+	max-width: 100%;
+	height: auto;
+	display: block;
+    margin: 0 auto;
 }
 </style>
 </h:head>
@@ -51,7 +57,8 @@
 						</p:submenu>
 						<p:submenu style="font-weight:bold; font-size:120%" label="Team" icon="fa fa-users">
 							<p:menuitem value="Gaël Guibon" icon="fa fa-user"
-								update="messagemenu" ajax="true">
+								update="messagemenu" ajax="true"
+								url="https://github.com/gguibon">
 							</p:menuitem>
 							<p:menuitem value="Isabelle Tellier" icon="fa fa-user"
 								update="messagemenu" ajax="true"
@@ -76,7 +83,7 @@
 							<p:menuitem icon="fa fa-power-off" update="messagemenu"
 								ajax="true" >
 							</p:menuitem>
-							<p:outputLabel>Version 0.9.1 Beta</p:outputLabel>
+							<p:outputLabel>v.1.0.2</p:outputLabel>
 						</f:facet>
 					</p:menubar>
 				</h:form>
@@ -88,6 +95,8 @@
 
 	<p:sticky target="tb" />
 
+	<!-- <h1 style="text-align: center">SOFA - Syntactic Old French Annotator</h1> -->
+	<img src="img/logo-KimGerdes/sofa200.png" alt="SOFA - Syntactic Old French Annotator" class="responsivecenter"></img>
 	<p:separator />
 
 	<ui:include src="/WEB-INF/select.xhtml" />

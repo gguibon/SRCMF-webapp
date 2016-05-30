@@ -23,13 +23,28 @@ import cnrs.lattice.srcmf.Params;
 public class SelectView implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+//	static {
+//	    System.load(Params.catalinabase + Params.dir + "library.so");
+//	  }
+//	static {
+//	    try {
+//	        System.loadLibrary("wapiti"); // used for tests. This library in classpath only
+//	    } catch (UnsatisfiedLinkError e) {
+//	        try {
+////	            NativeUtils.loadLibraryFromJar("/natives/crypt.dll"); // during runtime. .DLL within .JAR
+//	            NativeUtils.loadLibraryFromJar("/natives/"+System.mapLibraryName("crypt"));
+//	        } catch (IOException e1) {
+//	            throw new RuntimeException(e1);
+//	        }
+//	    }
+//	}
+	
 	private String tmpResPath = "";
     private String chemin = Params.userhome + Params.dir;
     private String logName = "res.log";
     private String TEST = "";
-    private String MODEL = "";
     private String MODEL_USED = "";
-    private String model;
+    private String model = "";
     private UploadedFile uploadedFile = new UploadedFile() {
 		
 		@Override
@@ -83,7 +98,7 @@ public class SelectView implements Serializable {
     }
  
     public void setModel(String model) {
-        this.model = model+"/"+model;
+        this.model = model;
         this.MODEL_USED = model;
     }
     
@@ -99,17 +114,23 @@ public class SelectView implements Serializable {
     	System.out.println("dummy");
     }
     
-    public void apiLaunch() throws Exception {
-    	tmpResPath = Tools.tempFile("tmp", ".res", "");
-		String[] arguments = { "1on1", "-test", chemin +"tests/"+ TEST + ".conll", 
-				"-matemodel", chemin+"models/"+model+".matemodel",
-				"-wapitimodel", chemin+"models/"+model+".wapitimodel",
-				"-out",	tmpResPath };
-		cnrs.lattice.engines.main.Main.main(arguments);
-		
-		Tools.ecrire(chemin+logName, MODEL_USED+"\n"+TEST);
-		
-		FacesMessage message = new FacesMessage("Successful", "Applying tagging and parsing models.");
+    public void apiLaunch() {
+    	
+    	try{
+	    	tmpResPath = Tools.tempFile("tmp", ".res", "");
+			String[] arguments = { "1on1", "-test", chemin +"tests/"+ TEST + ".conll", 
+					"-matemodel", chemin+"models/"+model+"/"+model+".matemodel",
+					"-wapitimodel", chemin+"models/"+model+"/"+model+".wapitimodel",
+					"-out",	tmpResPath };
+			cnrs.lattice.engines.main.Main.main(arguments);
+			
+			//Tools.ecrire(chemin+logName, MODEL_USED+"\n"+TEST);
+    	}catch(Exception e){
+    		Tools.ecrire(chemin+logName, Tools.getDateTime() + "\n" +e.getMessage());
+    		FacesMessage message = new FacesMessage("Warning", e.getMessage());
+        	FacesContext.getCurrentInstance().addMessage(null, message);    	
+    	}
+		FacesMessage message = new FacesMessage("Successful", "Annotation finished.");
     	FacesContext.getCurrentInstance().addMessage(null, message);    	
 	}
     
@@ -152,16 +173,22 @@ public class SelectView implements Serializable {
     
     
     public void apiLaunchCustom() throws Exception {    	
-    	String path = Tools.tempFile("tmp", ".conll", this.uploadedFileContent);
-    	tmpResPath = Tools.tempFile("tmp", ".res", "");
-    	System.out.println(path);
-		String[] arguments = { "1on1", "-test", path, 
-				"-matemodel", chemin+"models/"+model+".matemodel",
-				"-wapitimodel", chemin+"models/"+model+".wapitimodel",
-				"-out",	tmpResPath };//chemin + tmpResPath
-		cnrs.lattice.engines.main.Main.main(arguments);
-		Tools.ecrire(chemin+logName, MODEL_USED+"\n"+path);
-		
+    	try{
+	    	String path = Tools.tempFile("tmp", ".conll", this.uploadedFileContent);
+	    	tmpResPath = Tools.tempFile("tmp", ".res", "");
+	    	System.out.println(path);
+			String[] arguments = { "1on1", "-test", path, 
+					"-matemodel", chemin+"models/"+model+"/"+model+".matemodel",
+					"-wapitimodel", chemin+"models/"+model+"/"+model+".wapitimodel",
+					"-out",	tmpResPath };//chemin + tmpResPath
+			cnrs.lattice.engines.main.Main.main(arguments);
+			//Tools.ecrire(chemin+logName, MODEL_USED+"\n"+path);
+			
+	    }catch(Exception e){
+	    	Tools.ecrire(chemin+logName, Tools.getDateTime() + "\n" +e.getMessage());
+			FacesMessage message = new FacesMessage("Warning", e.getMessage());
+	    	FacesContext.getCurrentInstance().addMessage(null, message);    	
+		}
 		FacesMessage message = new FacesMessage("Successful", "Applying tagging and parsing models.");
     	FacesContext.getCurrentInstance().addMessage(null, message);
 	}

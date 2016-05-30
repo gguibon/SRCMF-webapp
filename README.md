@@ -1,8 +1,13 @@
-SRCMF-webapp
+SOFA - Syntactic Old French Annotator
 ===============
 
-This webapp is a graphical interface to use the SRCMF-api graphically. It allows the user to predicted lemma, part of speech tags, and syntax of Old french texts. 
+![Logo by Kim Gerdes](http://sofa.ilpga.fr:8888/sofa/img/logo-KimGerdes/sofa200.png "Logo by Kim Gerdes")
+
+
+SOFA is a web interface exploiting the [SRCMF-nlp API](https://github.com/gguibon/SRCMF-nlp-api "SRCMF nlp"). It allows the user to predicted lemma, part of speech tags, and syntax of Old french texts. 
 It was done for the Syntactic Reference Corpus of Medieval French (SRCMF) project. [Here the website](http://srcmf.org/ "SRCMF's Homepage")
+
+There is three related papers can be found here
 
 # Build
 
@@ -20,6 +25,13 @@ This will result in a .war which could be put in any apache tomcat server.
 # Usage
 
 Put the resulting .war into you work folder of Tomcat server. Launch it and open in your web browser.
+
+# Licence
+
+This program is under the AGPL licence. Please see the LICENCE file in the root directory
+
+# Credits
+The logo has been made by [Kim Gerdes](http://gerdes.fr/ "Kim Gerdes Website")
 
 # Contacts
 

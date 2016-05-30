@@ -20,7 +20,7 @@ public class Params implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	public static final String dir = "/srcmf-docs/";
-	public static String userhome = System.getProperty( "catalina.base" );//System.getProperty("user.home");
+	public static String userhome = System.getProperty("catalina.base");//System.getProperty("user.home");
 	public static String catalinabase = System.getProperty( "catalina.base" );
 	
 	public Params(){

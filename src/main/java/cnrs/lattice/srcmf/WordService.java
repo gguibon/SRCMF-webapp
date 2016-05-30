@@ -8,8 +8,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import org.apache.commons.lang3.StringUtils;
-
 import cnrs.lattice.tools.utils.Tools;
  
 @ManagedBean(name="wordService")
@@ -18,6 +16,7 @@ public class WordService implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private String chemin = Params.userhome + Params.dir;
     private List<Word> words = new ArrayList<Word>();
     private SelectView selectView = findBean("selectView");
@@ -36,7 +35,7 @@ public class WordService implements Serializable {
     	List<Word> words = new ArrayList<Word>();
     	String content = "_\t_\t_\t_\t_\t_\t_\t_\t_\t_\t_\t_\t_\t_\t_\n";
     	if(selectView.getTmpResPath().length() > 0)
-    		content = Tools.readFile(selectView.getTmpResPath());//Tools.readFile(chemin + "res.conll");
+    		content = Tools.readFile(selectView.getTmpResPath());
     	words = new Reader().readMate(content);
 		return words;
     }
