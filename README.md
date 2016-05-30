@@ -14,7 +14,7 @@ It follow the work made by [Mathieu Constant](http://igm.univ-mlv.fr/~mconstan/ 
 
 # The web application
 
-The web application is available here: [Logo by Kim Gerdes](http://sofa.ilpga.fr:8888/sofa/img/logo-KimGerdes/sofa200.png "")
+The web application is available here: [http://sofa.ilpga.fr](http://sofa.ilpga.fr "SOFA - Syntactic Old French Annotator")
 
 # Build
 
