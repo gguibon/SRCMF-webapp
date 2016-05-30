@@ -1,7 +1,7 @@
 SOFA - Syntactic Old French Annotator
 ===============
 
-![Logo by Kim Gerdes](http://sofa.ilpga.fr:8888/sofa/img/logo-KimGerdes/sofa100.png "Logo by Kim Gerdes")
+![Logo by Kim Gerdes](http://sofa.ilpga.fr:8080/sofa/img/logo-KimGerdes/sofa200.png "Logo by Kim Gerdes")
 
 
 SOFA is a web interface exploiting the [SRCMF-nlp API](https://github.com/gguibon/SRCMF-nlp-api "SRCMF nlp"). It allows the user to predicted lemma, part of speech tags, and syntax of Old french texts. 
