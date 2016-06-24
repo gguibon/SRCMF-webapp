@@ -129,10 +129,12 @@
 												<p:commandButton ajax="true" id="startApi"
 													value="Process API"
 													actionListener="#{selectView.apiLaunch}"
-													update="message charts tab" icon="ui-icon-check"
+													update="message charts tab arborator" icon="ui-icon-check"
 													onstart="PF('processeswv').block()"
-													oncomplete="PF('processeswv').unblock()">
-
+													oncomplete="PF('processeswv').unblock(); #{selectView.growlSuccess('Annotation finished !')}; updateArbo();">
+													
+													<p:remoteCommand name="updateArbo" update="messages" />
+													 
 													<p:confirm header="Confirmation"
 														message="It will take about 25 seconds. Continue?"
 														icon="ui-icon-alert" />
@@ -152,9 +154,9 @@
 												<p:commandButton id="startApiCustom"
 													value="Process Uploaded File"
 													actionListener="#{selectView.apiLaunchCustom}"
-													update="message charts tab" icon="ui-icon-check"
+													update="message tab charts arborator" icon="ui-icon-check"
 													onstart="PF('processeswv').block()"
-													oncomplete="PF('processeswv').unblock()">
+													oncomplete="PF('processeswv').unblock();">
 
 													<p:confirm header="Confirmation"
 														message="It will take about 25 seconds. Continue?"

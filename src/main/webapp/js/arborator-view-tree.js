@@ -1,0 +1,4 @@
+$(document).ready(function(){
+	// or simply make the tokens the second argument of 'draw'
+	draw("holder2",{"1": {"cat": "J", "gov": {"3": "attention"}, "index": "20", "lemma": "soit", "lexid": "lex20", "nb": "1", "t": "soit", "token": "soit"}, "2": {"cat": "Cl", "gov": {"3": "obj"}, "index": "21", "lemma": "on", "lexid": "lex21", "nb": "2", "t": "on", "token": "on"}, "3": {"cat": "V", "control": "-", "extraction": "-", "gov": {"0": "root"}, "index": "22", "inv": "-", "lemma": "travailler", "lexid": "lex22", "mode": "subjonctive/indicative", "nb": "3", "neg": "-", "number": "sg", "person": "3", "sat": "+", "t": "travaille", "tense": "present", "token": "travaille"}}); 
+});

@@ -63,6 +63,21 @@ public class Reader {
 		return read(str, "mate");
 	}
 	
+	public List<Word2> readMate2(String str) throws IOException{
+		//FEAT, PFEAT, FILLPRED, PRED, et APREDs sont ignorés (car absents du SRCMF). Changer si besoin.
+		//ID FORM LEMMA PLEMMA POS PPOS FEAT PFEAT HEAD PHEAD DEPREL PDEPREL FILLPRED PRED APREDs
+		this.idSent = 0;
+		this.form = 1;
+		this.lemmaGold = 2;
+		this.lemmaPredicted = 3;
+		this.posPredictedWapiti = 5;
+		this.posGold = 4;
+		this.governor = 8;
+		this.governorP = 9;
+		this.synFunction = 10;
+		this.synFunctionP = 11; 
+		return read2(str, "mate");
+	}
 	
 	public List<Word> readWapitiResults(List<Word> words, String str) throws IOException{
 		//FORM PLEMMATTagger PPOSTTagger _ _ _ REG GPOS PPOS
@@ -167,6 +182,107 @@ public class Reader {
 					}
 					String[] cols = line.split("\t");
 					Word w = Word.create();
+					w.setIdSrcmf(cols[idSrcmf]);
+					w.setIdSent(cols[idSent]);
+					w.setForm(cols[form]);
+					w.setLemmaPredicted(cols[lemmaPredicted]);
+					w.setPosPredictedTreeTagger(cols[posPredictedTreeTagger]);
+					w.setPosGold(cols[posGold]);
+					w.setMorpho(cols[morpho]);
+					w.setGovernor(cols[governor]);
+					w.setGovernorP(cols[governorP]);
+					w.setSynFunction(cols[synFunction]);
+					w.setSynFunctionP(cols[synFunctionP]);
+					w.setReg(cols[reg]);
+					words.add(w);
+				}
+				break;
+		}
+		return words;
+	}
+	
+	private List<Word2> read2(String content, String mode) throws IOException{
+		List<Word2> words = new ArrayList<Word2>();
+		List<String> lines = Tools.StringToList(content);
+		int current = 0;
+		int total = lines.size();
+		switch(mode){
+			case "mate" :
+				for(String line : lines){
+					current++;
+					Tools.printProgress(total, current);
+					if(line.length() == 0){
+						Word2 w = Word2.create().isNewLine();
+						words.add(w);
+						continue;
+					}
+					String[] cols = line.split("\t");
+					Word2 w = Word2.create();
+					w.setIdSent(cols[idSent]);
+					w.setForm(cols[form]);
+					w.setLemmaGold(cols[lemmaGold]);
+					w.setLemmaPredicted(cols[lemmaPredicted]);
+					w.setPosGold(cols[posGold]);
+					w.setPosPredictedWapiti(cols[posPredictedWapiti]);
+					w.setGovernor(cols[governor]);
+					w.setGovernorP(cols[governorP]);
+					w.setSynFunction(cols[synFunction]);
+					w.setSynFunctionP(cols[synFunctionP]);
+					words.add(w);
+				}
+				break;
+			case "wapiti" :
+				for(String line : lines){
+					current++;
+					Tools.printProgress(total, current);
+					if(line.length() == 0){
+						Word2 w = Word2.create().isNewLine();
+						words.add(w);
+						continue;
+					}
+					String[] cols = line.split("\t");
+					Word2 w = Word2.create();
+					w.setForm(cols[form]);
+					w.setLemmaGold(cols[lemmaPredicted]);
+					w.setPosPredictedTreeTagger(cols[posPredictedTreeTagger]);
+					w.setPosGold(cols[posGold]);
+					w.setReg(cols[reg]);
+					words.add(w);
+				}
+				break;		
+				
+			case "wapitiResults" :
+				for(String line : lines){
+					current++;
+					Tools.printProgress(total, current);
+					if(line.length() == 0){
+						Word2 w = Word2.create().isNewLine();
+						words.add(w);
+						continue;
+					}
+					String[] cols = line.split("\t");
+					Word2 w = Word2.create();
+					w.setForm(cols[form]);
+					w.setLemmaGold(cols[lemmaPredicted]);
+					w.setPosPredictedTreeTagger(cols[posPredictedTreeTagger]);
+					w.setPosGold(cols[posGold]);
+					w.setReg(cols[reg]);
+					w.setPosPredictedWapiti(cols[posPredictedWapiti]);
+					words.add(w);
+				}
+				break;	
+				
+			case "conll" :
+				for(String line : lines){
+					current++;
+					Tools.printProgress(total, current);
+					if(line.length() == 0){
+						Word2 w = Word2.create().isNewLine();
+						words.add(w);
+						continue;
+					}
+					String[] cols = line.split("\t");
+					Word2 w = Word2.create();
 					w.setIdSrcmf(cols[idSrcmf]);
 					w.setIdSent(cols[idSent]);
 					w.setForm(cols[form]);

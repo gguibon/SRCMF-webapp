@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:panel id="arborator" widgetVar="arbowv" header="Arborator"
+		collapsed="false" toggleable="true" toggleOrientation="vertical"
+		visible="true">
+
+ 		<!-- <ui:define name="content">
+			<h:outputScript name="js/raphael.js" target="head" />
+			<h:outputScript name="js/arborator.view.min.js" target="head" />
+		</ui:define> -->
+
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-12">
+					<!-- <h:form rendered="#{Person.name != 'null'}"> -->
+
+					<!-- <h:outputText escape="false" 
+value="&#60;script type='text/javascript'&#62;alert('yo');&#60;/script&#62;"/> -->
+
+					<h:form autoUpdate="true">
+						<p:dataScroller var="sentence"
+							value="#{dataExporterView.sentences}" chunkSize="10"
+							mode="inline" scrollHeight="500">
+							<f:facet name="header">
+            					Scroll Down to Load more trees
+        					</f:facet>
+
+
+
+							<h:panelGrid id="arboScript" columns="1" style="width:100%" columnClasses="tree">
+								<!-- 
+								<h:outputText escape="false" 
+value="&#60;script type='text/javascript'&#62;alert('#{sentence.id}');&#60;/script&#62;"/> -->
+								<!-- <h:outputText escape="false" value="#{sentence.jsonSentence}"/> -->
+								<!-- <script type='text/javascript'>
+									$(document).ready(function() {
+										draw('holder#{sentence.id}' , '{ #{sentence.jsonWords} }'
+										}); 
+									});
+								</script> -->
+
+								<div id='sentencediv#{sentence.id}' class='sentencediv'
+									style='margin: 10px;'>#{sentence.id}: sentence</div>
+								<div id='holder#{sentence.id}' style='overflow: auto;'></div>
+								<h:outputText escape="false"
+									value="&#60;script type='text/javascript'&#62;$(document).ready(function() {$(document).ready(function() {draw('holder#{sentence.id}' , { #{sentence.jsonWords} }); }); }); &#60;/script&#62;" />
+							</h:panelGrid>
+						</p:dataScroller>
+						<!-- <p:remoteCommand oncomplete=" &#60;script type='text/javascript'&#62;$(document).ready(function() {$(document).ready(function() {draw('holder#{sentence.id}' , { #{sentence.jsonWords} }); }); }); &#60;/script&#62; " autoRun="true"/> -->
+						
+					</h:form>
+					
+
+					<!-- <h:form>
+						<p:dataScroller var="word" value="#{dataExporterView.words}"
+							chunkSize="10" mode="inline" scrollHeight="500">
+							<f:facet name="header">
+            					Scroll Down to Load more trees
+        					</f:facet>
+
+							<h:panelGrid columns="1" style="width:100%"
+								columnClasses="tree">
+								<script type="text/javascript">
+								$(document).ready(function() {
+									//générer a partir du java les holder et token. 2 strings
+									// ou alors générer en java tout le javascript en string et l'importer #{js}
+									// pour chaque mot, générer ceci : 
+									/*	"1" : {
+									 		"cat" : "J",
+											"gov" : {
+												"3" : "attention"
+											},
+											
+											"lemma" : "soit",
+											"nb" : "1",
+											"t" : "soit",
+											"token" : "soit"
+										} */
+										// pour le premier pas de virgule au début.
+									draw("holder2", {
+										"1" : {
+											"cat" : "J",
+											"gov" : {
+												"3" : "attention"
+											},
+											
+											"lemma" : "soit",
+											"nb" : "1",
+											"t" : "soit",
+											"token" : "soit"
+										},
+										"2" : {
+											"cat" : "Cl",
+											"gov" : {
+												"3" : "obj"
+											},
+											"lemma" : "on",
+											"nb" : "2",
+											"t" : "on",
+											"token" : "on"
+										},
+										"3" : {
+											"cat" : "V",
+											"gov" : {
+												"0" : "root"
+											},
+											"lemma" : "travailler",
+											"nb" : "3",
+											"t" : "travaille",
+											"token" : "travaille"
+										}
+									});
+								});
+							</script>
+							<div id='sentencediv2' class='sentencediv' style="margin: 10px;">
+								2: soit on travaille</div>
+
+							<div id="holder2" style="overflow: auto;"></div>
+							</h:panelGrid>
+						</p:dataScroller>
+					</h:form> -->
+
+
+				</div>
+
+			</div>
+		</div>
+	<h:outputScript name="js/raphael.js" target="head" />
+	<h:outputScript name="js/arborator.view.min.js" target="head" />
+	</p:panel>
+
+<!-- 	<h:outputScript name="js/raphael.js" target="head" />
+	<h:outputScript name="js/arborator.view.min.js" target="head" /> -->
+</ui:composition>

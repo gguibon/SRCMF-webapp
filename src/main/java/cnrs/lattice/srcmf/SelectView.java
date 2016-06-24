@@ -5,9 +5,10 @@ import java.io.InputStream;
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.ViewHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
@@ -130,8 +131,14 @@ public class SelectView implements Serializable {
     		FacesMessage message = new FacesMessage("Warning", e.getMessage());
         	FacesContext.getCurrentInstance().addMessage(null, message);    	
     	}
-		FacesMessage message = new FacesMessage("Successful", "Annotation finished.");
-    	FacesContext.getCurrentInstance().addMessage(null, message);    	
+    	RequestContext context = RequestContext.getCurrentInstance();
+		//update panel
+        // context.update("arborator");
+        context.execute("location.reload();");        
+    	context.scrollTo("arborator");
+    	FacesMessage message = new FacesMessage("Successful", "Annotation finished.");
+     	FacesContext.getCurrentInstance().addMessage(null, message); 
+    	
 	}
     
     
@@ -189,8 +196,13 @@ public class SelectView implements Serializable {
 			FacesMessage message = new FacesMessage("Warning", e.getMessage());
 	    	FacesContext.getCurrentInstance().addMessage(null, message);    	
 		}
-		FacesMessage message = new FacesMessage("Successful", "Applying tagging and parsing models.");
-    	FacesContext.getCurrentInstance().addMessage(null, message);
+    	RequestContext context = RequestContext.getCurrentInstance();
+		//update panel
+        // context.update("arborator");
+        context.execute("location.reload();");        
+    	context.scrollTo("arborator");
+    	FacesMessage message = new FacesMessage("Successful", "Annotation finished.");
+     	FacesContext.getCurrentInstance().addMessage(null, message); 
 	}
     
     public void toCharts() {
@@ -208,6 +220,36 @@ public class SelectView implements Serializable {
     public void onTabChange(TabChangeEvent event){
     	RequestContext.getCurrentInstance().update("tab");
     	RequestContext.getCurrentInstance().update("charts");
+    }
+    
+    public void updateArbo() {
+        RequestContext context = RequestContext.getCurrentInstance();
+//        context.addCallbackParam("saved", true);    //basic parameter
+//        context.addCallbackParam("user", user);     //pojo as json
+         
+        //execute javascript oncomplete
+//        context.execute("PrimeFaces.info('Hello from the Backing Bean');");
+        context.execute("location.reload();");
+         
+        //update panel
+        context.update("arborator");
+         
+        //scroll to panel
+//        context.scrollTo("arborator");
+    }
+    
+    public void refreshPage(){
+    	FacesContext context = FacesContext.getCurrentInstance();
+    	String viewId = context.getViewRoot().getViewId();
+    	ViewHandler handler = context.getApplication().getViewHandler();
+    	UIViewRoot root = handler.createView(context, viewId);
+    	root.setViewId(viewId);
+    	context.setViewRoot(root);
+    }
+    
+    public void growlSuccess(String msg){
+    	FacesMessage message = new FacesMessage("Successful", msg);
+     	FacesContext.getCurrentInstance().addMessage(null, message); 
     }
     
     public void exit() {

@@ -1,6 +1,5 @@
 package cnrs.lattice.srcmf;
  
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.CellEditEvent;
@@ -26,9 +24,10 @@ public class DataExporterView implements Serializable {
 	private List<Word> words;
 	private List<Model> models;
 	private List<TestFile> testFiles;
+	private List<Sentence> sentences;
          
     @ManagedProperty(value="#{wordService}")
-    private WordService service;
+    private WordService wordService;
      
     @ManagedProperty(value="#{modelService}")
     private ModelService modelService;
@@ -36,14 +35,18 @@ public class DataExporterView implements Serializable {
     @ManagedProperty(value="#{testService}")
     private TestService testService;
     
+	@ManagedProperty(value="#{sentenceService}")
+	private SentenceService sentenceService;
+    
     @PostConstruct
     public void init() {
         try {
-			words = service.createWords();
+			words = wordService.createWords();
 			models = modelService.createModels();
 			testFiles = testService.createTestFiles();
+			sentences = sentenceService.createSentences();
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -55,8 +58,8 @@ public class DataExporterView implements Serializable {
         return words;
     }
     
-    public void setService(WordService service) {
-        this.service = service;
+    public void setWordService(WordService wordService) {
+        this.wordService = wordService;
     }
     
     public List<Model> getModels() {
@@ -75,7 +78,13 @@ public class DataExporterView implements Serializable {
     	this.testService = testService;
     }
     
-    
+    public List<Sentence> getSentences(){
+    	return sentences;
+    }
+    // do not forget the second is service
+    public void setSentenceService(SentenceService sentenceService){
+    	this.sentenceService = sentenceService;
+    }
 
     public void onCellEdit(CellEditEvent event) {
         Object oldValue = event.getOldValue();
